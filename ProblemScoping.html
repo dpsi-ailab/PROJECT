@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Guard AI | Problem Scoping Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f0fdf4; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(187, 247, 208, 1); }
+        .gradient-text { background: linear-gradient(90deg, #166534, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        input::placeholder, textarea::placeholder { font-style: italic; color: #94a3b8; font-size: 0.875rem; }
+        
+        .row-animation { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-extrabold gradient-text">Project "Eco-Guard AI"</h1>
+            <p class="text-emerald-700 mt-2 text-lg font-medium">Environmental Resilience Architect - Stage 1: Problem Scoping & Requirement Analysis</p>
+        </header>
+
+        <!-- Mission Overview -->
+        <div class="bg-emerald-800 text-white rounded-2xl p-6 mb-8 shadow-xl">
+            <h3 class="text-xl font-bold mb-2 text-emerald-300">Our Mission: Mission Green India</h3>
+            <p class="text-emerald-50 opacity-90 leading-relaxed">
+                Create an AI project to find solutions for the rapidly changing environment of our country. 
+                Identify prevailing problems with direct environmental impact and provide deployable, practical solutions.
+            </p>
+        </div>
+
+        <!-- Stage 1: 4Ws Problem Canvas -->
+        <section class="glass-card rounded-2xl p-6 shadow-md mb-8 border-l-4 border-l-emerald-500">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-2 bg-emerald-100 rounded-lg text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">The 4Ws Problem Canvas</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <label class="block">
+                        <span class="text-emerald-800 font-semibold block mb-1">Who? (Stakeholders)</span>
+                        <textarea id="who" class="w-full p-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none h-24" placeholder="e.g., Farmers, Wildlife conservationists, City Municipalities..."></textarea>
+                    </label>
+                    <label class="block">
+                        <span class="text-emerald-800 font-semibold block mb-1">What? (Problem Nature)</span>
+                        <textarea id="what" class="w-full p-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none h-24" placeholder="e.g., Unpredictable monsoon cycles causing crop failure..."></textarea>
+                    </label>
+                </div>
+                <div class="space-y-4">
+                    <label class="block">
+                        <span class="text-emerald-800 font-semibold block mb-1">Where? (Location/Timeline)</span>
+                        <textarea id="where" class="w-full p-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none h-24" placeholder="e.g., Rural areas of Maharashtra, specific to the Kharif season..."></textarea>
+                    </label>
+                    <label class="block">
+                        <span class="text-emerald-800 font-semibold block mb-1">Why? (AI Benefit)</span>
+                        <textarea id="why" class="w-full p-3 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none h-24" placeholder="e.g., AI can process years of weather data to provide precise localized forecasts..."></textarea>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stage 2: Requirement Analysis (Dynamic Dropdown & Add) -->
+        <section class="glass-card rounded-2xl p-6 shadow-md mb-8">
+            <div class="flex items-center justify-between gap-3 mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-emerald-100 rounded-lg text-emerald-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800">Requirement Analysis</h2>
+                </div>
+                <button onclick="addRequirementRow()" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-semibold transition-all shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                    Add Requirement
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-emerald-50 border-b border-emerald-200">
+                            <th class="p-4 font-semibold text-emerald-900 w-1/4">Type</th>
+                            <th class="p-4 font-semibold text-emerald-900 w-1/4">Feature (Requirement)</th>
+                            <th class="p-4 font-semibold text-emerald-700 italic w-1/3">How will it work? (Implementation)</th>
+                            <th class="p-4 w-16 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reqTableBody">
+                        <!-- Rows added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="emptyState" class="py-12 text-center text-slate-400 italic">
+                No requirements added yet. Click "Add Requirement" to start.
+            </div>
+        </section>
+
+        <!-- Stage 3: Parameters -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="glass-card rounded-2xl p-6 shadow-md">
+                <h3 class="text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h7" stroke-width="2" stroke-linecap="round"/></svg>
+                    Input Parameters
+                </h3>
+                <div class="space-y-3" id="inputContainer">
+                    <input type="text" class="input-param w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Parameter 1: e.g., Historical Temperature Trends">
+                    <input type="text" class="input-param w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Parameter 2: e.g., Satellite Imagery of Land Use">
+                    <input type="text" class="input-param w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Parameter 3: e.g., Soil Moisture Content Levels">
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 shadow-md border-t-4 border-t-emerald-600">
+                <h3 class="text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-width="2" stroke-linecap="round"/></svg>
+                    Output Parameters (Solutions)
+                </h3>
+                <div class="space-y-3" id="outputContainer">
+                    <input type="text" class="output-param w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Result 1: e.g., Automated Irrigation Schedule">
+                    <input type="text" class="output-param w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Result 2: e.g., Heatstroke Risk Alert Levels">
+                    <input type="text" class="output-param w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Result 3: e.g., Reforestation Site Recommendations">
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls -->
+        <div class="flex justify-center gap-4">
+            <button onclick="generateExcel()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-4 px-10 rounded-2xl transition shadow-xl flex items-center gap-2 group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Export Technical Scope to Excel
+            </button>
+        </div>
+
+        <footer class="mt-12 text-center text-emerald-800 opacity-60 text-sm border-t border-emerald-200 pt-8 pb-4">
+            Eco-Guard AI Technical Portal | Phase 1: Requirement & Data Scoping
+        </footer>
+    </div>
+
+    <script>
+        const reqTableBody = document.getElementById('reqTableBody');
+        const emptyState = document.getElementById('emptyState');
+
+        function toggleEmptyState() {
+            if (reqTableBody.children.length > 0) {
+                emptyState.classList.add('hidden');
+            } else {
+                emptyState.classList.remove('hidden');
+            }
+        }
+
+        function addRequirementRow() {
+            const tr = document.createElement('tr');
+            tr.className = "border-b border-slate-100 row-animation";
+            tr.innerHTML = `
+                <td class="p-4">
+                    <select class="req-type w-full p-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                        <option value="Functional">Functional</option>
+                        <option value="Non-Functional">Non-Functional</option>
+                    </select>
+                </td>
+                <td class="p-4">
+                    <input type="text" class="req-feature w-full p-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="e.g., Data Ingestion, Alert System...">
+                </td>
+                <td class="p-4">
+                    <input type="text" class="req-implementation w-full p-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Explain the technical logic...">
+                </td>
+                <td class="p-4 text-center">
+                    <button onclick="removeRow(this)" class="text-red-400 hover:text-red-600 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                </td>
+            `;
+            reqTableBody.appendChild(tr);
+            toggleEmptyState();
+        }
+
+        function removeRow(btn) {
+            btn.closest('tr').remove();
+            toggleEmptyState();
+        }
+
+        // Initialize with one default row
+        window.onload = () => {
+            addRequirementRow();
+        };
+
+        function generateExcel() {
+            // 1. Gather 4Ws Data
+            const excelData = [
+                ["TECHNICAL SCOPE: PROJECT ECO-GUARD AI", ""],
+                ["Generated on:", new Date().toLocaleDateString()],
+                [],
+                ["PART 1: THE 4Ws CANVAS", ""],
+                ["WHO (Stakeholders)", document.getElementById('who').value],
+                ["WHAT (Problem)", document.getElementById('what').value],
+                ["WHERE (Context)", document.getElementById('where').value],
+                ["WHY (AI Solution)", document.getElementById('why').value],
+                [],
+                ["PART 2: REQUIREMENT ANALYSIS", "", ""],
+                ["Type", "Feature", "Implementation Detail"]
+            ];
+
+            // 2. Gather Dynamic Requirements
+            const rows = document.querySelectorAll('#reqTableBody tr');
+            rows.forEach(row => {
+                const type = row.querySelector('.req-type').value;
+                const feature = row.querySelector('.req-feature').value;
+                const implementation = row.querySelector('.req-implementation').value;
+                if (feature || implementation) {
+                    excelData.push([type, feature, implementation]);
+                }
+            });
+
+            excelData.push([], ["PART 3: DATA PARAMETERS", ""]);
+            
+            // 3. Gather Inputs
+            excelData.push(["INPUT PARAMETERS", ""]);
+            document.querySelectorAll('.input-param').forEach(input => {
+                if(input.value) excelData.push(["", input.value]);
+            });
+
+            // 4. Gather Outputs
+            excelData.push(["OUTPUT PARAMETERS (SOLUTIONS)", ""]);
+            document.querySelectorAll('.output-param').forEach(input => {
+                if(input.value) excelData.push(["", input.value]);
+            });
+
+            // 5. Create Workbook
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet(excelData);
+
+            // Styling column widths
+            ws['!cols'] = [{ wch: 30 }, { wch: 40 }, { wch: 60 }];
+
+            XLSX.utils.book_append_sheet(wb, ws, "Technical Scope");
+            XLSX.writeFile(wb, "Eco_Guard_AI_Technical_Scope.xlsx");
+        }
+    </script>
+</body>
+</html>
